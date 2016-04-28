@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>alert</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="alert alert-success" role="alert">success</div>
+		<div class="alert alert-info" role="alert">info</div>
+		<div class="alert alert-warning" role="alert">warning</div>
+		<div class="alert alert-danger" role="alert">danger</div>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Warning!</strong> 可以关闭的警告框
+		</div>
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Warning!</strong> 可以关闭的警告框
+		</div>
+		<div class="alert alert-danger" role="alert">danger</div>
+		<div class="alert alert-info" role="alert">
+			就这么一致了<a href="#" class="alert-link">使连接和警告文本的颜色一致</a>
+		</div>
+		<div class="alert alert-info" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			就这么一致了<a href="#" class="alert-link">使连接和警告文本的颜色一致</a>而且可以关闭
+		</div>
+	</div>
+
+
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script src="alert.js" charset="utf-8"></script>
+	<script type="text/javascript">
+			$.fn.alert.noConflict()
+	</script>
+</body>
+
+</html>
