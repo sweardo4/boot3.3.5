@@ -1,6 +1,9 @@
 ##bootstrapjs 源码学习
 
 bootstrap version 3.3.5
+
+## alert.js
+
 ```js
 //$防止全局污染
 +function ($) {//写入+的目的，是防止不规范代码，通常是遗漏了分号，导致编译器认为前后是一体的从而导致出错。
