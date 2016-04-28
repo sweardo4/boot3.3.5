@@ -84,7 +84,9 @@
 
   var old = $.fn.alert// 把命名空间里的原有的alert放入old
 
+
   console.log(Plugin);
+
   $.fn.alert             = Plugin
   $.fn.alert.Constructor = Alert//重新设置插件的构造函数
 
@@ -102,7 +104,9 @@
   // ==============
 
   //  事件委托   触发dismiss时  关闭此元素
+
   console.log($(this));
+
   $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
 
 }(jQuery);
