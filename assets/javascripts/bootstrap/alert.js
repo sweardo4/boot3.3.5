@@ -63,10 +63,8 @@
     }
 
     $.support.transition && $parent.hasClass('fade') ?
-      $parent
-        .one('bsTransitionEnd', removeElement)
-        .emulateTransitionEnd(Alert.TRANSITION_DURATION) :
-      removeElement()
+      $parent.one('bsTransitionEnd', removeElement)
+          .emulateTransitionEnd(Alert.TRANSITION_DURATION) : removeElement()
   }
 
 
