@@ -37,9 +37,6 @@
         if(slideEvent.isDefaultPrevented()) return
         this.sliding = true
         isCycling && this.pause()
-        
-
-
     }
 
 

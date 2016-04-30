@@ -234,7 +234,7 @@
     .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
   $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () {
+    $('[data-ride="carousel"]').each(function () { //适用多个轮播
       var $carousel = $(this)
 
       console.log($(this).data() === 'carousel')
