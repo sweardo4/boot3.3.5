@@ -174,22 +174,28 @@
   // ==========================
 
   function Plugin(option) {
-    console.log(this)
-    console.log($(this))
+    // console.log(this)//div#carousel-example-generic.carousel.slide
+    // console.log($(this))//div#carousel-example-generic.carousel.slide,selector:''
     
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.carousel')
-      console.log($this.data())
+      var data    = $this.data('bs.carousel')//Carousel
+      // console.log(data) 
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      console.log(options)
+      //Object {interval: 5000, pause: "hover", wrap: true, keyboard: true, ride: "carousel"}
+      // console.log(options) 
+      
+      //option -->object
       var action  = typeof option == 'string' ? option : options.slide
-      console.log(option)
-      console.log(action)
-      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
+      // console.log(action) 
+      
+      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options))) //初次初始化
+      //当option == number时
+
       if (typeof option == 'number') data.to(option)
-      else if (action) data[action]()
+      else if (action) data[action]() //原型链
       else if (options.interval) data.pause().cycle()
+      
     })
   }
 
@@ -237,7 +243,6 @@
     $('[data-ride="carousel"]').each(function () { //适用多个轮播
       var $carousel = $(this)
 
-      console.log($(this).data() === 'carousel')
       Plugin.call($carousel, $carousel.data())
     })
   })
