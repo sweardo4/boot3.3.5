@@ -23,25 +23,25 @@
     this.$active     = null
     this.$items      = null
 
-    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))
+    this.options.keyboard && this.$element.on('keydown.bs.carousel', $.proxy(this.keydown, this))//键盘事件
 
     this.options.pause == 'hover' && !('ontouchstart' in document.documentElement) && this.$element
-      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))
-      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
+      .on('mouseenter.bs.carousel', $.proxy(this.pause, this))//鼠标放上
+      .on('mouseleave.bs.carousel', $.proxy(this.cycle, this)) //鼠标离开
   }
 
   Carousel.VERSION  = '3.3.5'
 
-  Carousel.TRANSITION_DURATION = 600
+  Carousel.TRANSITION_DURATION = 2000//默认切换时间
 
-  Carousel.DEFAULTS = {
-    interval: 5000,
-    pause: 'hover',
-    wrap: true,
-    keyboard: true
+  Carousel.DEFAULTS = {//默认配置
+    interval: 5000,//5秒切换
+    pause: 'hover',//鼠标放上停止
+    wrap: true,//开启循环
+    keyboard: true//键盘事件开启
   }
 
-  Carousel.prototype.keydown = function (e) {
+  Carousel.prototype.keydown = function (e) {//键盘事件定义
     if (/input|textarea/i.test(e.target.tagName)) return
     switch (e.which) {
       case 37: this.prev(); break
@@ -49,10 +49,10 @@
       default: return
     }
 
-    e.preventDefault()
+    e.preventDefault()//关闭默认行为
   }
 
-  Carousel.prototype.cycle = function (e) {
+  Carousel.prototype.cycle = function (e) {//循环
     e || (this.paused = false)
 
     this.interval && clearInterval(this.interval)
@@ -91,7 +91,7 @@
     return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
   }
 
-  Carousel.prototype.pause = function (e) {
+  Carousel.prototype.pause = function (e) {//暂停
     e || (this.paused = true)
 
     if (this.$element.find('.next, .prev').length && $.support.transition) {
@@ -104,21 +104,21 @@
     return this
   }
 
-  Carousel.prototype.next = function () {
+  Carousel.prototype.next = function () {//下一个
     if (this.sliding) return
     return this.slide('next')
   }
 
-  Carousel.prototype.prev = function () {
+  Carousel.prototype.prev = function () {//上一个
     if (this.sliding) return
     return this.slide('prev')
   }
 
   Carousel.prototype.slide = function (type, next) {
-    var $active   = this.$element.find('.item.active')
+    var $active   = this.$element.find('.item.active')//当前焦点元素
     var $next     = next || this.getItemForDirection(type, $active)
-    var isCycling = this.interval
-    var direction = type == 'next' ? 'left' : 'right'
+    var isCycling = this.interval//时间资源
+    var direction = type == 'next' ? 'left' : 'right' 
     var that      = this
 
     if ($next.hasClass('active')) return (this.sliding = false)
@@ -174,12 +174,18 @@
   // ==========================
 
   function Plugin(option) {
+    console.log(this)
+    console.log($(this))
+    
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.carousel')
+      console.log($this.data())
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
+      console.log(options)
       var action  = typeof option == 'string' ? option : options.slide
-
+      console.log(option)
+      console.log(action)
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]()
@@ -230,6 +236,8 @@
   $(window).on('load', function () {
     $('[data-ride="carousel"]').each(function () {
       var $carousel = $(this)
+
+      console.log($(this).data() === 'carousel')
       Plugin.call($carousel, $carousel.data())
     })
   })
