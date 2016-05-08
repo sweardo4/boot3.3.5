@@ -27,9 +27,13 @@
     "test",
     "*.gemspec",
     "Rakefile",
-    "Gemfile"
+    "Gemfile",
+    "node_modules",
+    "bower_components",
+    "tests"
   ],
   "dependencies": {
     "jquery": ">= 1.9.0"
-  }
+  },
+  "private": true
 }

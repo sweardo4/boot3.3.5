@@ -32,7 +32,7 @@
 
   Carousel.VERSION  = '3.3.5'
 
-  Carousel.TRANSITION_DURATION = 2000//默认切换时间
+  Carousel.TRANSITION_DURATION = 500//默认切换时间
 
   Carousel.DEFAULTS = {//默认配置
     interval: 5000,//5秒切换
@@ -193,7 +193,7 @@
       //当option == number时
 
       if (typeof option == 'number') data.to(option)
-      else if (action) data[action]() //原型链
+      else if (action) data[action]() //原型链上
       else if (options.interval) data.pause().cycle()
       
     })
