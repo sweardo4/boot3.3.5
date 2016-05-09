@@ -32,7 +32,7 @@
 
   Carousel.VERSION  = '3.3.5'
 
-  Carousel.TRANSITION_DURATION = 500//默认切换时间
+  Carousel.TRANSITION_DURATION = 500//默认
 
   Carousel.DEFAULTS = {//默认配置
     interval: 5000,//5秒切换

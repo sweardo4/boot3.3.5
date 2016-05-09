@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lb</title>
+    <!--<link rel="stylesheet" href="../../stylesheets/bootstrap.min.css">-->
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+
+    <style>
+        /*.images{overflow: hidden; width: 300px;height: 300px;}*/
+        .images >span {
+            position: relative;
+            display: inline-block;
+            width: 300px;height: 300px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="images">
+            <span  id="move">图片</span>
+            <span  id="move2">图片</span>
+        </div>
+        <input type="button" id = 'btn' value="点击" >
+    </div>
+
+    <script>
+        !(function(){
+            var move = document.querySelector('#move');
+            var btn = document.querySelector('#btn');
+            btn.addEventListener('click',function(){
+                var tem = 0;
+                var leftint = setInterval(function(){
+                    tem -=0.10;
+                    move.style.left = tem +'px';
+                    console.log(move.style.left)
+                    if(tem <= -300)
+                    {
+                        clearInterval(leftint);
+                    }
+                },0.1)
+            },false);
+        })();
+    </script>
+</body>
+</html>
