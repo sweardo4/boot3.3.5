@@ -9,10 +9,8 @@
 
 +function ($) {
   'use strict';
-
   // CAROUSEL CLASS DEFINITION
   // =========================
-
   var Carousel = function (element, options) {
     this.$element    = $(element)
     this.$indicators = this.$element.find('.carousel-indicators')
@@ -118,7 +116,7 @@
     var $active   = this.$element.find('.item.active')//当前焦点元素
     var $next     = next || this.getItemForDirection(type, $active)
     var isCycling = this.interval//时间资源
-    var direction = type == 'next' ? 'left' : 'right' 
+    var direction = type == 'next' ? 'left' : 'right'
     var that      = this
 
     if ($next.hasClass('active')) return (this.sliding = false)
@@ -176,26 +174,26 @@
   function Plugin(option) {
     // console.log(this)//div#carousel-example-generic.carousel.slide
     // console.log($(this))//div#carousel-example-generic.carousel.slide,selector:''
-    
+
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.carousel')//Carousel
-      // console.log(data) 
+      // console.log(data)
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
       //Object {interval: 5000, pause: "hover", wrap: true, keyboard: true, ride: "carousel"}
-      // console.log(options) 
-      
+      // console.log(options)
+
       //option -->object
       var action  = typeof option == 'string' ? option : options.slide
-      // console.log(action) 
-      
+      // console.log(action)
+
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options))) //初次初始化
       //当option == number时
 
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]() //原型链上
       else if (options.interval) data.pause().cycle()
-      
+
     })
   }
 
@@ -240,9 +238,8 @@
     .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
   $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () { //适用多个轮播
+    $('[data-ride="carousel"]').each(function () { 
       var $carousel = $(this)
-
       Plugin.call($carousel, $carousel.data())
     })
   })
