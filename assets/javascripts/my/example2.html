@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>example2</title>
+</head>
+<body>
+
+	<div id="example">
+		example text
+	</div>
+
+	<input type="submit" value = "点击">
+
+
+	<script src="../jquery.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	+function($){
+
+		var example = $('#example');
+		$('input').on('click',function(){
+			async(100, function(value){
+				async(value, function(value){
+					async(value, function(value){
+						async(value, function(value){
+							async(value, function(value){
+								async(value, final);
+							});
+						});
+					});
+				});
+			});
+		})
+		function async(arg, callback) {
+			console.log('参数为 ' + arg +' , 2秒后返回结果');
+			setTimeout(function() { callback(arg * 2); }, 2000);
+		}
+		function final(value) {
+			console.log('完成: ', value);
+		}
+
+	}(jQuery)
+	</script>
+</body>
+</html>
