@@ -180,6 +180,7 @@
 
       //读取jQuery缓存数据 第一次时读取没有数据 下面的if为初始化一次 字段为bs.carousel的缓存数据 //优化
       var data    = $this.data('bs.carousel')//undefined
+      // options 合并对象
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       //option -->object
