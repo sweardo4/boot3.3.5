@@ -177,22 +177,20 @@
 
     return this.each(function () {
       var $this   = $(this)
-      var data    = $this.data('bs.carousel')//Carousel
-      // console.log(data)
+
+      //读取jQuery缓存数据 第一次时读取没有数据 下面的if为初始化一次 字段为bs.carousel的缓存数据 //优化
+      var data    = $this.data('bs.carousel')//undefined
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      //Object {interval: 5000, pause: "hover", wrap: true, keyboard: true, ride: "carousel"}
-      // console.log(options)
 
       //option -->object
       var action  = typeof option == 'string' ? option : options.slide
       // console.log(action)
-
+      //利用jquery.data 设置缓存数据
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options))) //初次初始化
       //当option == number时
-
       if (typeof option == 'number') data.to(option)
-      else if (action) data[action]() //原型链上
-      else if (options.interval) data.pause().cycle()
+      else if (action) data[action]() //原型链上//当不是last->first或first->last的中间操作
+      else if (options.interval) data.pause().cycle()//last->first或first->last操作
 
     })
   }
@@ -238,7 +236,7 @@
     .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
   $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () { 
+    $('[data-ride="carousel"]').each(function () {
       var $carousel = $(this)
       Plugin.call($carousel, $carousel.data())
     })
