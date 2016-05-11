@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>example2</title>
+</head>
+<body>
+
+	<input type="file" id="test-input">
+	<img src="" alt="">
+	<img src="" alt="">
+
+	<script src="../jquery.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	+function($){
+		var windowURL = window.URL || window.webkitURL;
+		var file = $('#test-input')[0].files[0];
+		var formData = new FormData();
+		var img = null;
+		formData.append('file', file);
+		$(document).on('change','#test-input',function(){
+			console.log(img = $('#test-input')[0].files[0]);
+			var srcDate = windowURL.createObjectURL(img)
+			console.log($('img'));
+			$('img').attr('src',srcDate);
+		})
+
+		$.ajax('https://www.baidu.com', {
+			method: 'POST',
+			dateType:'jsonp',
+			contentType: false,
+			processData: false,
+			data: formData
+		});
+
+	}(jQuery)
+	</script>
+</body>
+</html>
