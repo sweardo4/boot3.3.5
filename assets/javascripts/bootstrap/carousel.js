@@ -1,11 +1,3 @@
-/* ========================================================================
- * Bootstrap: carousel.js v3.3.5
- * http://getbootstrap.com/javascript/#carousel
- * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
 
 +function ($) {
   'use strict';
@@ -77,6 +69,7 @@
     return this.$items.eq(itemIndex)
   }
 
+  //白点跳跃函数
   Carousel.prototype.to = function (pos) {
     var that        = this
     var activeIndex = this.getItemIndex(this.$active = this.$element.find('.item.active'))
@@ -89,7 +82,8 @@
     return this.slide(pos > activeIndex ? 'next' : 'prev', this.$items.eq(pos))
   }
 
-  Carousel.prototype.pause = function (e) {//暂停
+  //暂停
+  Carousel.prototype.pause = function (e) {
     e || (this.paused = true)
 
     if (this.$element.find('.next, .prev').length && $.support.transition) {
@@ -101,13 +95,13 @@
 
     return this
   }
-
-  Carousel.prototype.next = function () {//下一个
+  //下一个
+  Carousel.prototype.next = function () {
     if (this.sliding) return
     return this.slide('next')
   }
-
-  Carousel.prototype.prev = function () {//上一个
+  //上一个
+  Carousel.prototype.prev = function () {
     if (this.sliding) return
     return this.slide('prev')
   }
@@ -172,25 +166,21 @@
   // ==========================
 
   function Plugin(option) {
-    // console.log(this)//div#carousel-example-generic.carousel.slide
-    // console.log($(this))//div#carousel-example-generic.carousel.slide,selector:''
-
     return this.each(function () {
       var $this   = $(this)
 
       //读取jQuery缓存数据 第一次时读取没有数据 下面的if为初始化一次 字段为bs.carousel的缓存数据 //优化
       var data    = $this.data('bs.carousel')//undefined
-      // options 合并对象
+      // options   $.extend合并对象
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       //option -->object
       var action  = typeof option == 'string' ? option : options.slide
-      // console.log(action)
-      //利用jquery.data 设置缓存数据
+      //利用jquery.data方法 设置缓存数据
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options))) //初次初始化
       //当option == number时
-      if (typeof option == 'number') data.to(option)
-      else if (action) data[action]() //原型链上//当不是last->first或first->last的中间操作
+      if (typeof option == 'number') data.to(option)//点击白点时 option为数字 此处执行
+      else if (action) data[action]() //原型链上//当不是last->first或first->last的中间操作 此处执行
       else if (options.interval) data.pause().cycle()//last->first或first->last操作
 
     })
@@ -214,6 +204,7 @@
   // CAROUSEL DATA-API
   // =================
 
+  //获取当前点击事件位置 传入current terget  e
   var clickHandler = function (e) {
     var href
     var $this   = $(this)
@@ -223,19 +214,28 @@
     var slideIndex = $this.attr('data-slide-to')
     if (slideIndex) options.interval = false
 
-    Plugin.call($target, options)
 
+    /*
+         关于Plugin.call的用法分析
+            $target 传入操作对象
+            options 参数
+    */
+    Plugin.call($target, options)//白点或left right事件再次通过
+
+    //白点跳跃时  执行此处
     if (slideIndex) {
       $target.data('bs.carousel').to(slideIndex)
     }
-
     e.preventDefault()
   }
 
+
+//委托事件监听  点击执行  left right 白点
   $(document)
     .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
     .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
+//加载执行 也算是初始化
   $(window).on('load', function () {
     $('[data-ride="carousel"]').each(function () {
       var $carousel = $(this)
