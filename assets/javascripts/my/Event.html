@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Event</title>
+</head>
+<body>
+	<input type="button" value="点击" id="inclick">
+	<input type="text" id="inclick2">
+
+<script type="text/javascript">
+		var Events={
+			handleEvent:function(event){
+					switch (event.type) {
+						case 'click':
+							this.clickEvent(event);
+							break;
+						case  'focus':
+							this.focusEvent(event);
+							break;
+						default:
+							console.log('game over');
+							return;
+					}
+			},
+			focusEvent:function(event){
+						alert('执行了focus事件')	;
+			},
+			clickEvent:function(event){
+						alert('执行了click事件')	;
+			}
+		}
+		document.getElementById('inclick').addEventListener('click',Events,false)
+		document.getElementById('inclick2').addEventListener('focus',Events,false)
+
+		function clickHandler() {
+			console.log('clickHandler:', this);
+		}
+		document.addEventListener('click', clickHandler, false);
+
+</script>
+</body>
+</html>

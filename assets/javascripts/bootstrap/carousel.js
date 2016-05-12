@@ -5,7 +5,7 @@
   // =========================
   var Carousel = function (element, options) {
     this.$element    = $(element)
-    this.$indicators = this.$element.find('.carousel-indicators')
+    this.$indicators = this.$element.find('.carousel-indicators')//白点标识
     this.options     = options
     this.paused      = null
     this.sliding     = null
@@ -54,18 +54,19 @@
     return this
   }
 
+  // 获取当前所处节点索引值
   Carousel.prototype.getItemIndex = function (item) {
-    this.$items = item.parent().children('.item')
+    this.$items = item.parent().children('.item')//获取轮播项集合
     return this.$items.index(item || this.$active)
   }
 
   Carousel.prototype.getItemForDirection = function (direction, active) {
-    var activeIndex = this.getItemIndex(active)
+    var activeIndex = this.getItemIndex(active) //获取当前显示的元素索引值
     var willWrap = (direction == 'prev' && activeIndex === 0)
-                || (direction == 'next' && activeIndex == (this.$items.length - 1))
-    if (willWrap && !this.options.wrap) return active
-    var delta = direction == 'prev' ? -1 : 1
-    var itemIndex = (activeIndex + delta) % this.$items.length
+                || (direction == 'next' && activeIndex == (this.$items.length - 1)) //判断当前是否是处在第一个或最后一个元素
+    if (willWrap && !this.options.wrap) return active // 当禁止循环时 且 当前事件是first->last ||last->first  则停留在first or last位置
+    var delta = direction == 'prev' ? -1 : 1//是+1还是-1
+    var itemIndex = (activeIndex + delta) % this.$items.length //取模运算  算法公式  ()
     return this.$items.eq(itemIndex)
   }
 
@@ -108,19 +109,19 @@
 
   Carousel.prototype.slide = function (type, next) {
     var $active   = this.$element.find('.item.active')//当前焦点元素
-    var $next     = next || this.getItemForDirection(type, $active)
+    var $next     = next || this.getItemForDirection(type, $active)//获取移动地点
     var isCycling = this.interval//时间资源
-    var direction = type == 'next' ? 'left' : 'right'
-    var that      = this
+    var direction = type == 'next' ? 'left' : 'right'//方向
+    var that      = this//当前对象
 
-    if ($next.hasClass('active')) return (this.sliding = false)
+    if ($next.hasClass('active')) return (this.sliding = false)//判断地点是否有active类
 
     var relatedTarget = $next[0]
-    var slideEvent = $.Event('slide.bs.carousel', {
+    var slideEvent = $.Event('slide.bs.carousel', {//注册一个新事件对象
       relatedTarget: relatedTarget,
       direction: direction
     })
-    this.$element.trigger(slideEvent)
+    this.$element.trigger(slideEvent)//利用trigger触发这个事件
     if (slideEvent.isDefaultPrevented()) return
 
     this.sliding = true
@@ -229,12 +230,13 @@
     e.preventDefault()
   }
 
+//委托事件监听  点击执行  left right=====白点
 
-//委托事件监听  点击执行  left right 白点
   $(document)
     .on('click.bs.carousel.data-api', '[data-slide]', clickHandler)
     .on('click.bs.carousel.data-api', '[data-slide-to]', clickHandler)
 
+//初始化时执行  load和plugin
 //加载执行 也算是初始化
   $(window).on('load', function () {
     $('[data-ride="carousel"]').each(function () {
@@ -242,5 +244,4 @@
       Plugin.call($carousel, $carousel.data())
     })
   })
-
 }(jQuery);
