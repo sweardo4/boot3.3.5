@@ -5,7 +5,7 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-
+//下拉菜单
 
 +function ($) {
   'use strict';
@@ -35,14 +35,18 @@
   }
 
   function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
+
+    if (e && e.which === 3) return //键盘事件
+
+    $(backdrop).remove()//去掉backdrop
+
     $(toggle).each(function () {
       var $this         = $(this)//当前button
       var $parent       = getParent($this)//button的父元素
       var relatedTarget = { relatedTarget: this }//button this对象
 
       if (!$parent.hasClass('open')) return//转折点  当.open 存在 则转换为隐藏事件 继续往下  当.open不存在 则会直接返回
+      // if (!$parent.hasClass('open')) return //如果是已经开启的则事件改变成hide
 
       if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
 
