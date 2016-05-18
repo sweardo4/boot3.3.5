@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
+// 警告框   的关闭
 //$防止全局污染
 +function ($) {//写入+的目的，是防止不规范代码，通常是遗漏了分号，导致编译器认为前后是一体的从而导致出错。
   'use strict';
