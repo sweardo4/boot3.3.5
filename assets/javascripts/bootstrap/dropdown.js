@@ -35,14 +35,17 @@
   }
 
   function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
+
+    if (e && e.which === 3) return //键盘事件
+
+    $(backdrop).remove()//去掉backdrop
+
     $(toggle).each(function () {
       var $this         = $(this)
       var $parent       = getParent($this)
       var relatedTarget = { relatedTarget: this }
 
-      if (!$parent.hasClass('open')) return
+      if (!$parent.hasClass('open')) return //如果是已经开启的则事件改变成hide
 
       if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
 
