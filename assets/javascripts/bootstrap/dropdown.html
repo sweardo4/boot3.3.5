@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+   <title>下拉菜单</title>
+   <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../../stylesheets/bootstrap-theme.min.css">
+ 	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+ 	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+<div class="dropdown">
+   <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
+      data-toggle="dropdown">
+      主题
+      <span class="caret"></span>
+   </button>
+   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li role="presentation">
+         <a role="menuitem" tabindex="-1" href="#">Java</a>
+      </li>
+      <li role="presentation">
+         <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+      </li>
+      <li role="presentation">
+         <a role="menuitem" tabindex="-1" href="#">
+            数据通信/网络
+         </a>
+      </li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation">
+         <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+      </li>
+   </ul>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+<script src="../jquery.js" charset="utf-8"></script>
+<!-- <script src="dropdown.js" charset="utf-8"></script> -->
+<script src="dropdown.js" charset="utf-8"></script>
+</body>
+</html>

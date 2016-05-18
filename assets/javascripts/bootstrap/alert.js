@@ -31,26 +31,26 @@
     // console.log($this)
     var selector = $this.attr('data-target')
     //if 属性data-target存在  则不执行if  如果data-target 不存在则在href中取
-    // if (!selector) {//----------
-    //   selector = $this.attr('href')
-    //   selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    // }
+    if (!selector) {//----------
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
     // 根据上面取得的选择器取得对应的jquery对象
     var $parent = $(selector)
     //阻止click的默认事件
-    // if (e) e.preventDefault()//submit表单  a标签 ---------
+    if (e) e.preventDefault()//submit表单  a标签 ---------
 
     //如果上面没能取到有效的元素，则选择第一个class含alert的祖先
     if (!$parent.length) {
       $parent = $this.closest('.alert')//closest jquery查找方法  从元素本身开始，逐级向上级元素匹配，并返回最先匹配的元素
     }
     // 新建一个'close.bs.alert'事件，并用该事件触发上面所选到的jquery对象
-    // $parent.trigger(e = $.Event('close.bs.alert'))
+    $parent.trigger(e = $.Event('close.bs.alert'))
     // 如果开发者利用preventDefault阻止了该事件的默认方法则return结束，否则继续执行
    // 注意：此处的e是新建的'close.bs.alert'事件，与上面被阻止默认的click事件无关
-    // if (e.isDefaultPrevented()) return
+    if (e.isDefaultPrevented()) return
 
-    // $parent.removeClass('in')
+    $parent.removeClass('in')
 
     function removeElement() {//detach 从DOM中删除所有匹配的元素。
       // detach from parent, fire event then clean up data
