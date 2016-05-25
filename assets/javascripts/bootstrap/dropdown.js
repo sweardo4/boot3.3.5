@@ -5,7 +5,7 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
-//下拉菜单 
+//下拉菜单
 
 +function ($) {
   'use strict';
@@ -14,7 +14,7 @@
   // =========================
 
   var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
+  var toggle   = '[data-toggle="dropdown"]'//button
   var Dropdown = function (element) {
     $(element).on('click.bs.dropdown', this.toggle)
   }
@@ -41,11 +41,12 @@
     $(backdrop).remove()//去掉backdrop
 
     $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
+      var $this         = $(this)//当前button
+      var $parent       = getParent($this)//button的父元素
+      var relatedTarget = { relatedTarget: this }//button this对象
 
-      if (!$parent.hasClass('open')) return //如果是已经开启的则事件改变成hide
+      if (!$parent.hasClass('open')) return//转折点  当.open 存在 则转换为隐藏事件 继续往下  当.open不存在 则会直接返回
+      // if (!$parent.hasClass('open')) return //如果是已经开启的则事件改变成hide
 
       if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
 
@@ -61,9 +62,9 @@
   Dropdown.prototype.toggle = function (e) {
     var $this = $(this)
 
-    if ($this.is('.disabled, :disabled')) return
+    if ($this.is('.disabled, :disabled')) return//如果他们式隐藏的元素不予亦显示
 
-    var $parent  = getParent($this)
+    var $parent  = getParent($this)//获取父元素对象
     var isActive = $parent.hasClass('open')
 
     clearMenus()
@@ -160,7 +161,7 @@
 
   $(document)
     .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })//阻止冒泡
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
     .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)

@@ -39,13 +39,10 @@ function Plugin(option){
   $.fn.alert.Constructor = Alert
 
   $.fn.alert.noConflict = function(){
+
     $.fn.alert = old
     return this
   }
 
   $(document).on('click.bs.alert.data-api',dismiss,Alert.prototype.close);
-
-
-
-
 }(jQuery)
