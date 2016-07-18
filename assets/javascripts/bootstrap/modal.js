@@ -292,6 +292,7 @@
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.modal')
+      // 扩展多个对象为一个对象
       var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
@@ -326,6 +327,7 @@
 
     if ($this.is('a')) e.preventDefault()
 
+// console.log(this)
     $target.one('show.bs.modal', function (showEvent) {
       if (showEvent.isDefaultPrevented()) return // only register focus restorer if modal will actually get shown
       $target.one('hidden.bs.modal', function () {
